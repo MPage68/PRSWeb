@@ -1,11 +1,14 @@
 package com.prs.web;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.prs.business.vendor.Vendor;
@@ -25,9 +28,10 @@ public class VendorController {
 	}
 
 	@GetMapping("/Get")
-	public @ResponseBody Iterable<Vendor> getVenders() {
-		Iterable<Vendor> vendors = vendorRepository.findAll();
-		return vendors;
+	public @ResponseBody Optional<Vendor> getVenders(@RequestParam int id) {
+		Optional<Vendor> vendor = vendorRepository.findById(id);
+
+		return vendor;
 
 	}
 
@@ -38,14 +42,15 @@ public class VendorController {
 	}
 
 	@PostMapping("/Change")
-	public @ResponseBody Vendor changeVendor(@RequestBody Vendor vendor) {
+	public @ResponseBody Vendor updateVendor(@RequestBody Vendor vendor) {
 		return vendorRepository.save(vendor);
 
 	}
 
 	@PostMapping("/Remove")
-	public @ResponseBody String RemoveVendor(@RequestBody Vendor vendor) {
-		vendorRepository.save(vendor);
+	public @ResponseBody String removeVendor(@RequestBody Vendor vendor) {
+		vendorRepository.delete(vendor);
 		return "Vendor removed";
 	}
+
 }

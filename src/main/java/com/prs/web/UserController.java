@@ -44,8 +44,8 @@ public class UserController {
 		return userRepository.save(user);
 	}
 	@PostMapping("/Remove")
-	public @ResponseBody String RemoveUser(@RequestBody User user) {
-		userRepository.save(user);
+	public @ResponseBody String removeUser(@RequestBody User user) {
+		userRepository.delete(user);
 		return "user removed";
 	}
 	

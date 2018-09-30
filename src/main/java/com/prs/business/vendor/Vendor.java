@@ -21,14 +21,14 @@ public class Vendor {
 	private String phoneNumber;
 	private String email;
 	private boolean isPreApproved;
-	private boolean isActive;
+	
 
 	public Vendor() {
 		super();
 	}
 
 	public Vendor(int iD, String code, String name, String address, String city, String state, String zip,
-			String phoneNumber, String email, boolean isPreApproved, boolean isActive) {
+			String phoneNumber, String email, boolean isPreApproved) {
 		super();
 		ID = iD;
 		this.code = code;
@@ -40,7 +40,7 @@ public class Vendor {
 		this.phoneNumber = phoneNumber;
 		this.email = email;
 		this.isPreApproved = isPreApproved;
-		this.isActive = isActive;
+		
 	}
 
 	public int getID() {
@@ -123,12 +123,6 @@ public class Vendor {
 		this.isPreApproved = isPreApproved;
 	}
 
-	public boolean isActive() {
-		return isActive;
-	}
-
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
-	}
+	
 
 }
