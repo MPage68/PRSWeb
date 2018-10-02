@@ -1,6 +1,5 @@
 package com.prs.web;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,10 +42,11 @@ public class UserController {
 	public @ResponseBody User updateUser(@RequestBody User user) {
 		return userRepository.save(user);
 	}
+
 	@PostMapping("/Remove")
 	public @ResponseBody String removeUser(@RequestBody User user) {
 		userRepository.delete(user);
 		return "user removed";
 	}
-	
+
 }

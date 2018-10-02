@@ -16,12 +16,11 @@ public class Vendor {
 	private String name;
 	private String address;
 	private String city;
-	private String State;
+	private String state;
 	private String zip;
 	private String phoneNumber;
 	private String email;
 	private boolean isPreApproved;
-	
 
 	public Vendor() {
 		super();
@@ -35,12 +34,12 @@ public class Vendor {
 		this.name = name;
 		this.address = address;
 		this.city = city;
-		State = state;
+		this.state = state;
 		this.zip = zip;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
 		this.isPreApproved = isPreApproved;
-		
+
 	}
 
 	public int getID() {
@@ -84,11 +83,11 @@ public class Vendor {
 	}
 
 	public String getState() {
-		return State;
+		return state;
 	}
 
 	public void setState(String state) {
-		State = state;
+		this.state = state;
 	}
 
 	public String getZip() {
@@ -122,7 +121,5 @@ public class Vendor {
 	public void setPreApproved(boolean isPreApproved) {
 		this.isPreApproved = isPreApproved;
 	}
-
-	
 
 }
