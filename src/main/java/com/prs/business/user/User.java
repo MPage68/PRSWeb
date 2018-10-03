@@ -37,6 +37,11 @@ public class User {
 		this.isAdmin = isAdmin;
 	}
 
+	public User(String string, String string2, String string3, String string4, String string5, String string6,
+			boolean b, boolean c) {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public String toString() {
 		return "User [ID=" + ID + ", userName=" + userName + ", passWord=" + passWord + ", firstName=" + firstName

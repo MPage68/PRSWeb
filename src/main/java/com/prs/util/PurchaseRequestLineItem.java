@@ -9,70 +9,58 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.prs.business.product.Product;
 import com.prs.purchaserequest.PurchaseRequest;
 
 @Entity
 public class PurchaseRequestLineItem {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int ID;
+	private int id;
 	@ManyToOne
 	@JoinColumn(name = "purchaseRequestID")
 	private PurchaseRequest purchaseRequest;
-	private int productID;
+	@ManyToOne
+	@JoinColumn(name = "productID")
+	private Product product;
 	private int quantity;
-	private boolean isActive;
-	private DateFormat dateCreated;
-	private DateFormat dateUpdated;
-	private boolean updatedByUser;
 
-	public PurchaseRequestLineItem(PurchaseRequest purchaseRequest, int productID, int quantity, boolean isActive,
-			DateFormat dateCreated, DateFormat dateUpdated, boolean updatedByUser) {
-		super();
-		this.purchaseRequest = purchaseRequest;
-		this.productID = productID;
-		this.quantity = quantity;
-		this.isActive = isActive;
-		this.dateCreated = dateCreated;
-		this.dateUpdated = dateUpdated;
-		this.updatedByUser = updatedByUser;
+	public PurchaseRequestLineItem() {
+		id = 0;
+		purchaseRequest = null;
+		product = null;
+		quantity = 0;
 	}
 
-	public PurchaseRequestLineItem(int iD, PurchaseRequest purchaseRequest, int productID, int quantity,
-			boolean isActive, DateFormat dateCreated, DateFormat dateUpdated, boolean updatedByUser) {
-		super();
-		ID = iD;
-		this.purchaseRequest = purchaseRequest;
-		this.productID = productID;
-		this.quantity = quantity;
-		this.isActive = isActive;
-		this.dateCreated = dateCreated;
-		this.dateUpdated = dateUpdated;
-		this.updatedByUser = updatedByUser;
+	public PurchaseRequestLineItem(int inID, PurchaseRequest inPr, Product inPdt, int inQty) {
+		id = inID;
+		purchaseRequest = inPr;
+		product = inPdt;
+		quantity = inQty;
 	}
 
-	public int getID() {
-		return ID;
+	public int getId() {
+		return id;
 	}
 
-	public void setID(int iD) {
-		ID = iD;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public PurchaseRequest getPurchaseRequest() {
 		return purchaseRequest;
 	}
 
-	public void setPurchaseRequestID(PurchaseRequest purchaseRequest) {
+	public void setPurchaseRequest(PurchaseRequest purchaseRequest) {
 		this.purchaseRequest = purchaseRequest;
 	}
 
-	public int getProductID() {
-		return productID;
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setProductID(int productID) {
-		this.productID = productID;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	public int getQuantity() {
@@ -83,43 +71,10 @@ public class PurchaseRequestLineItem {
 		this.quantity = quantity;
 	}
 
-	public boolean isActive() {
-		return isActive;
-	}
-
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
-	}
-
-	public DateFormat getDateCreated() {
-		return dateCreated;
-	}
-
-	public void setDateCreated(DateFormat dateCreated) {
-		this.dateCreated = dateCreated;
-	}
-
-	public DateFormat getDateUpdated() {
-		return dateUpdated;
-	}
-
-	public void setDateUpdated(DateFormat dateUpdated) {
-		this.dateUpdated = dateUpdated;
-	}
-
-	public boolean isUpdatedByUser() {
-		return updatedByUser;
-	}
-
-	public void setUpdatedByUser(boolean updatedByUser) {
-		this.updatedByUser = updatedByUser;
-	}
-
 	@Override
 	public String toString() {
-		return "PurchaseRequestLineItem [ID=" + ID + ", purchaseRequest=" + purchaseRequest + ", productID=" + productID
-				+ ", quantity=" + quantity + ", isActive=" + isActive + ", dateCreated=" + dateCreated
-				+ ", dateUpdated=" + dateUpdated + ", updatedByUser=" + updatedByUser + "]";
+		return "PurchaseRequestLineItem [id=" + id + ", purchaseRequest=" + purchaseRequest + ", product=" + product
+				+ ", quantity=" + quantity + "]";
 	}
 
 }
