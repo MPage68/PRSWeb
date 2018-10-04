@@ -1,5 +1,6 @@
 package com.prs;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -33,8 +34,8 @@ public class PRSUserTests extends PrsWebApplicationTests {
 		u2.get().setUserName("newUserName");
 		assertNotNull(userRepository.save(u2.get()));
 		
-	//	userRepository.delete(u2.get());
-	//	assertThat(!(userRepository.findById(id)));
+		userRepository.delete(u2.get());
+		assertThat((userRepository.findById(id)));
 		
 	}
 	
