@@ -77,5 +77,8 @@ public class PurchaseRequestController {
 			return JsonResponse.getErrorInstance("Error, :" + e.getMessage(), e);
 		}
 	}
-
+@PostMapping("/Submit")
+public @ResponseBody JsonResponse submitPurchaseRequest(@RequestBody PurchaseRequest purchaseRequest) {
+	
+}
 }

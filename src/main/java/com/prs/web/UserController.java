@@ -47,7 +47,16 @@ public class UserController {
 			return JsonResponse.getErrorInstance("Error in getting user:" + e.getMessage(), null);
 		}
 	}
-
+	@PostMapping("/Login")
+	public @ResponseBody JsonResponse authenticate(@RequestBody User user) {
+		try {
+			User u = userRepository.findByUserNameAndPassword(user.getUserName(), user.getPassWord());
+			return JsonResponse.getInstance(u);
+		}
+		catch(Exception e) {
+		return JsonResponse.getErrorInstance("Error in getting user:" + e.getMessage(), null);
+		}
+	}
 	@PostMapping("/Add")
 	public @ResponseBody JsonResponse addUser(@RequestBody User user) {
 		return saveUser(user);
