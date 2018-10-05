@@ -1,5 +1,6 @@
 package com.prs.web;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +60,7 @@ public class PurchaseRequestController {
 
 	public @ResponseBody JsonResponse savePurchaseRequest(PurchaseRequest purchaseRequest) {
 		try {
-			purchaseRequestRepository.save(purchaseRequest);
+			purchaseRequestRepository.save(submitPurchaseRequest(purchaseRequest));
 			return JsonResponse.getInstance(purchaseRequest);
 		} catch (DataIntegrityViolationException ex) {
 			return JsonResponse.getErrorInstance(ex.getRootCause().toString(), ex);
@@ -77,8 +78,15 @@ public class PurchaseRequestController {
 			return JsonResponse.getErrorInstance("Error, :" + e.getMessage(), e);
 		}
 	}
-@PostMapping("/Submit")
-public @ResponseBody JsonResponse submitPurchaseRequest(@RequestBody PurchaseRequest purchaseRequest) {
-	
-}
+
+	public PurchaseRequest submitPurchaseRequest(PurchaseRequest purchaseRequest) {
+		purchaseRequest.setSubmittedDate(LocalDateTime.now());
+		if (purchaseRequest.getTotal() < 50) {
+			purchaseRequest.setStatus(purchaseRequest.STATUS_APPROVED);
+		} else {
+			purchaseRequest.setStatus(purchaseRequest.STATUS_NEW);
+		}
+		return purchaseRequest;
+
+	}
 }

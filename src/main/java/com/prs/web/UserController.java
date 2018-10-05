@@ -47,16 +47,17 @@ public class UserController {
 			return JsonResponse.getErrorInstance("Error in getting user:" + e.getMessage(), null);
 		}
 	}
+
 	@PostMapping("/Login")
 	public @ResponseBody JsonResponse authenticate(@RequestBody User user) {
 		try {
-			User u = userRepository.findByUserNameAndPassword(user.getUserName(), user.getPassWord());
+			User u = userRepository.findByUserNameAndPassword(user.getUserName(), user.getPassword());
 			return JsonResponse.getInstance(u);
-		}
-		catch(Exception e) {
-		return JsonResponse.getErrorInstance("Error in getting user:" + e.getMessage(), null);
+		} catch (Exception e) {
+			return JsonResponse.getErrorInstance("Error in getting user:" + e.getMessage(), null);
 		}
 	}
+
 	@PostMapping("/Add")
 	public @ResponseBody JsonResponse addUser(@RequestBody User user) {
 		return saveUser(user);
@@ -81,11 +82,11 @@ public class UserController {
 	@PostMapping("/Remove")
 	public @ResponseBody JsonResponse removeUser(@RequestBody User user) {
 		try {
-		userRepository.delete(user);
-		return JsonResponse.getInstance(user);
-	}
-		catch (Exception ex) {
-			return JsonResponse.getErrorInstance(ex.getMessage(), ex);}
+			userRepository.delete(user);
+			return JsonResponse.getInstance(user);
+		} catch (Exception ex) {
+			return JsonResponse.getErrorInstance(ex.getMessage(), ex);
 		}
+	}
 
 }

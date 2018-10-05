@@ -1,5 +1,6 @@
 package com.prs.business.user;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,42 +12,45 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int ID;
 	private String userName;
-	private String passWord;
+	private String password;
 	private String firstName;
 	private String lastName;
 	private String phoneNumber;
 	private String eMail;
-	private boolean isReviewer;
-	private boolean isAdmin;
+	@Column(name = "isReviewer")
+	private boolean reviewer;
+	@Column(name = "isAdmin")
+	private boolean admin;
 
 	public User() {
-		super();
+		userName = "";
+		password = "";
 	}
 
-	public User(int iD, String userName, String passWord, String firstName, String lastName, String phoneNumber,
-			String eMail, boolean isReviewer, boolean isAdmin) {
+	public User(int iD, String userName, String password, String firstName, String lastName, String phoneNumber,
+			String eMail, boolean reviewer, boolean admin) {
 		super();
 		ID = iD;
 		this.userName = userName;
-		this.passWord = passWord;
+		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
 		this.eMail = eMail;
-		this.isReviewer = isReviewer;
-		this.isAdmin = isAdmin;
+		this.reviewer = reviewer;
+		this.admin = admin;
 	}
 
-	public User(String string, String string2, String string3, String string4, String string5, String string6,
-			boolean b, boolean c) {
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public String toString() {
-		return "User [ID=" + ID + ", userName=" + userName + ", passWord=" + passWord + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", phonNumber=" + phoneNumber + ", eMail=" + eMail + ", isReviewer="
-				+ isReviewer + ", isAdmin=" + isAdmin + "]";
+	public User(String userName, String password, String firstName, String lastName, String phoneNumber, String eMail,
+			boolean isReviewer, boolean isAdmin) {
+		setUserName(userName);
+		setPassword(password);
+		setFirstName(firstName);
+		setLastName(lastName);
+		setPhoneNumber(phoneNumber);
+		seteMail(eMail);
+		setReviewer(isReviewer);
+		setAdmin(isAdmin);
 	}
 
 	public int getID() {
@@ -65,12 +69,12 @@ public class User {
 		this.userName = userName;
 	}
 
-	public String getPassWord() {
-		return passWord;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPassWord(String passWord) {
-		this.passWord = passWord;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getFirstName() {
@@ -89,12 +93,12 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public String getPhonNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhonNumber(String phonNumber) {
-		this.phoneNumber = phonNumber;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public String geteMail() {
@@ -105,20 +109,28 @@ public class User {
 		this.eMail = eMail;
 	}
 
-	public boolean getIsReviewer() {
-		return isReviewer;
+	public boolean isReviewer() {
+		return reviewer;
 	}
 
-	public void setIsReviewer(boolean isReviewer) {
-		this.isReviewer = isReviewer;
+	public void setReviewer(boolean reviewer) {
+		this.reviewer = reviewer;
 	}
 
-	public boolean getIsAdmin() {
-		return isAdmin;
+	public boolean isAdmin() {
+		return admin;
 	}
 
-	public void setIsAdmin(boolean isAdmin) {
-		this.isAdmin = isAdmin;
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
 	}
 
+	@Override
+	public String toString() {
+		return "User [ID=" + ID + ", userName=" + userName + ", password=" + password + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", phoneNumber=" + phoneNumber + ", eMail=" + eMail + ", reviewer="
+				+ reviewer + ", admin=" + admin + "]";
+	}
+
+	
 }

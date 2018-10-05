@@ -1,5 +1,6 @@
 package com.prs.business.vendor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,14 +21,15 @@ public class Vendor {
 	private String zip;
 	private String phoneNumber;
 	private String email;
-	private boolean isPreApproved;
+	@Column(name = "PreApproved")
+	private boolean preApproved;
 
 	public Vendor() {
 		super();
 	}
 
 	public Vendor(int iD, String code, String name, String address, String city, String state, String zip,
-			String phoneNumber, String email, boolean isPreApproved) {
+			String phoneNumber, String email, boolean preApproved) {
 		super();
 		ID = iD;
 		this.code = code;
@@ -38,8 +40,21 @@ public class Vendor {
 		this.zip = zip;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
-		this.isPreApproved = isPreApproved;
+		this.preApproved = preApproved;
+	}
 
+	public Vendor(String code, String name, String address, String city, String state, String zip, String phoneNumber,
+			String email, boolean preApproved) {
+		super();
+		this.code = code;
+		this.name = name;
+		this.address = address;
+		this.city = city;
+		this.state = state;
+		this.zip = zip;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.preApproved = preApproved;
 	}
 
 	public int getID() {
@@ -115,11 +130,22 @@ public class Vendor {
 	}
 
 	public boolean isPreApproved() {
-		return isPreApproved;
+		return preApproved;
 	}
 
-	public void setPreApproved(boolean isPreApproved) {
-		this.isPreApproved = isPreApproved;
+	public void setPreApproved(boolean preApproved) {
+		this.preApproved = preApproved;
 	}
 
+	@Override
+	public String toString() {
+		return "Vendor [ID=" + ID + ", code=" + code + ", name=" + name + ", address=" + address + ", city=" + city
+				+ ", state=" + state + ", zip=" + zip + ", phoneNumber=" + phoneNumber + ", email=" + email
+				+ ", preApproved=" + preApproved + "]";
+	}
+
+	public String getSummary() {
+		return "Vendor code: " + code + " ,Vendor name: " + name;
+
+	}
 }

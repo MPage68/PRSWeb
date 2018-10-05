@@ -27,9 +27,23 @@ public class PurchaseRequest {
 	private String status;
 	private double total;
 	private LocalDateTime submittedDate;
+	public final String STATUS_NEW = "New";
+	public final String STATUS_REVIEW = "Review";
+	public final String STATUS_EDIT = "Edit";
+	public final String STATUS_APPROVED = "Approved";
+	public final String STATUS_REJECTED = "Rejected";
 
 	public PurchaseRequest() {
-		super();
+		ID = 0;
+		user = null;
+		description = "";
+		justification = "";
+		dateNeeded = dateNeeded.now();
+		deliveryMode = "";
+		status = "";
+		total = 0.0;
+		submittedDate = submittedDate.now();
+
 	}
 
 	public PurchaseRequest(User user, String description, String justification, LocalDate dateNeeded,
