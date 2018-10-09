@@ -29,7 +29,7 @@ public class VendorController {
 		try {
 			return JsonResponse.getInstance(vendorRepository.findAll());
 		} catch (Exception e) {
-			return JsonResponse.getErrorInstance("Error:" + e.getMessage(), e);
+			return JsonResponse.getErrorInstance("Error, vendor list failure:" + e.getMessage(), e);
 		}
 	}
 
@@ -40,33 +40,31 @@ public class VendorController {
 			if (vendor.isPresent()) {
 				return JsonResponse.getInstance(vendor);
 			} else {
-				return JsonResponse.getErrorInstance("Incorrect vendor id:" + id, null);
+				return JsonResponse.getErrorInstance("Error, Vendor ID not found:" + id, null);
 			}
 		} catch (Exception e) {
-			return JsonResponse.getErrorInstance("Error:" + e.getMessage(), e);
+			return JsonResponse.getErrorInstance("Error, Vendor ID not valid:" + e.getMessage(), e);
 		}
 	}
 
 	@PostMapping("/Add")
 	public @ResponseBody JsonResponse addVender(@RequestBody Vendor vendor) {
 		return saveVendor(vendor);
-
 	}
 
 	@PostMapping("/Change")
 	public @ResponseBody JsonResponse updateVendor(@RequestBody Vendor vendor) {
 		return saveVendor(vendor);
-
 	}
-
+	
 	public @ResponseBody JsonResponse saveVendor(@RequestBody Vendor vendor) {
 		try {
 			vendorRepository.save(vendor);
 			return JsonResponse.getInstance(vendor);
-		} catch (DataIntegrityViolationException ex) {
-			return JsonResponse.getErrorInstance(ex.getRootCause().toString(), ex);
-		} catch (Exception ex) {
-			return JsonResponse.getErrorInstance(ex.getMessage(), ex);
+		} catch (DataIntegrityViolationException e) {
+			return JsonResponse.getErrorInstance(e.getRootCause().toString(), e);
+		} catch (Exception e) {
+			return JsonResponse.getErrorInstance(e.getMessage(), e);
 		}
 	}
 
@@ -76,7 +74,7 @@ public class VendorController {
 			vendorRepository.delete(vendor);
 			return JsonResponse.getInstance(vendor);
 		} catch (Exception e) {
-			return JsonResponse.getErrorInstance("Error, vendor not deleted:", e);
+			return JsonResponse.getErrorInstance(e.getMessage(), e);
 		}
 	}
 }
