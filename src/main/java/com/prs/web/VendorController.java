@@ -29,7 +29,7 @@ public class VendorController {
 		try {
 			return JsonResponse.getInstance(vendorRepository.findAll());
 		} catch (Exception e) {
-			return JsonResponse.getErrorInstance("Error, vendor list failure:" + e.getMessage(), e);
+			return JsonResponse.getErrorInstance("Error, Vendor list failure:" + e.getMessage(), e);
 		}
 	}
 
