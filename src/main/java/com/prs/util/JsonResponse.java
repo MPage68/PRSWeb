@@ -66,5 +66,4 @@ public class JsonResponse {
 	public static JsonResponse getErrorInstance(String m, Exception e) {
 		return new JsonResponse(-1, m, null, e);
 	}
-
 }

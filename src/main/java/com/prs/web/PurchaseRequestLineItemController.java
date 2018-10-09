@@ -41,10 +41,10 @@ public class PurchaseRequestLineItemController {
 			if (purchaseRequestLineItem.isPresent()) {
 				return JsonResponse.getInstance(purchaseRequestLineItem);
 			} else {
-				return JsonResponse.getErrorInstance("Error: " + id, null);
+				return JsonResponse.getErrorInstance("Error, purchase request line item not found : " + id, null);
 			}
 		} catch (Exception e) {
-			return JsonResponse.getErrorInstance("Error:" + e.getMessage(), e);
+			return JsonResponse.getErrorInstance("Error, purchase request line item not valid:" + e.getMessage(), e);
 		}
 	}
 
@@ -78,8 +78,7 @@ public class PurchaseRequestLineItemController {
 			purchaseRequestLineItemRepository.delete(purchaseRequestLineItem);
 			return JsonResponse.getInstance(purchaseRequestLineItem);
 		} catch (Exception e) {
-			return JsonResponse.getErrorInstance("Error: " + e.getMessage(), e);
+			return JsonResponse.getErrorInstance(e.getMessage(), e);
 		}
-
 	}
 }

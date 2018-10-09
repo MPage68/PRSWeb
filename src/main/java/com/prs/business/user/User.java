@@ -130,7 +130,5 @@ public class User {
 		return "User [ID=" + ID + ", userName=" + userName + ", password=" + password + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", phoneNumber=" + phoneNumber + ", eMail=" + eMail + ", reviewer="
 				+ reviewer + ", admin=" + admin + "]";
-	}
-
-	
+	}	
 }

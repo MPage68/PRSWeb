@@ -43,7 +43,6 @@ public class PurchaseRequest {
 		status = "";
 		total = 0.0;
 		submittedDate = submittedDate.now();
-
 	}
 
 	public PurchaseRequest(User user, String description, String justification, LocalDate dateNeeded,
@@ -151,5 +150,4 @@ public class PurchaseRequest {
 				+ justification + ", dateNeeded=" + dateNeeded + ", deliveryMode=" + deliveryMode + ", status=" + status
 				+ ", total=" + total + ", submittedDate=" + submittedDate + "]";
 	}
-
 }

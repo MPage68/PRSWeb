@@ -108,5 +108,4 @@ public class Product {
 		return "Product [id=" + id + ", vendor=" + vendor + ", partNumber=" + partNumber + ", name=" + name + ", price="
 				+ price + ", unit=" + unit + ", photoPath=" + photoPath + "]";
 	}
-
 }

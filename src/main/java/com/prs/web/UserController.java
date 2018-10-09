@@ -30,7 +30,6 @@ public class UserController {
 			return JsonResponse.getInstance(userRepository.findAll());
 		} catch (Exception e) {
 			return JsonResponse.getErrorInstance("User list failure:" + e.getMessage(), e);
-
 		}
 	}
 
@@ -41,10 +40,10 @@ public class UserController {
 			if (user.isPresent()) {
 				return JsonResponse.getInstance(user.get());
 			} else {
-				return JsonResponse.getErrorInstance("User not found for id:" + id, null);
+				return JsonResponse.getErrorInstance("User ID not found:" + id, null);
 			}
 		} catch (Exception e) {
-			return JsonResponse.getErrorInstance("Error in getting user:" + e.getMessage(), null);
+			return JsonResponse.getErrorInstance("Error, User ID not valid:" + e.getMessage(), null);
 		}
 	}
 
@@ -54,7 +53,7 @@ public class UserController {
 			User u = userRepository.findByUserNameAndPassword(user.getUserName(), user.getPassword());
 			return JsonResponse.getInstance(u);
 		} catch (Exception e) {
-			return JsonResponse.getErrorInstance("Error in getting user:" + e.getMessage(), null);
+			return JsonResponse.getErrorInstance("Error, login not valid. Please try again:" + e.getMessage(), null);
 		}
 	}
 
@@ -72,10 +71,10 @@ public class UserController {
 		try {
 			userRepository.save(user);
 			return JsonResponse.getInstance(user);
-		} catch (DataIntegrityViolationException ex) {
-			return JsonResponse.getErrorInstance(ex.getRootCause().toString(), ex);
-		} catch (Exception ex) {
-			return JsonResponse.getErrorInstance(ex.getMessage(), ex);
+		} catch (DataIntegrityViolationException e) {
+			return JsonResponse.getErrorInstance(e.getRootCause().toString(), e);
+		} catch (Exception e) {
+			return JsonResponse.getErrorInstance(e.getMessage(), e);
 		}
 	}
 
@@ -84,9 +83,8 @@ public class UserController {
 		try {
 			userRepository.delete(user);
 			return JsonResponse.getInstance(user);
-		} catch (Exception ex) {
-			return JsonResponse.getErrorInstance(ex.getMessage(), ex);
+		} catch (Exception e) {
+			return JsonResponse.getErrorInstance(e.getMessage(), e);
 		}
 	}
-
 }

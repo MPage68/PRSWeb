@@ -35,8 +35,6 @@ public class PRSUserTests extends PrsWebApplicationTests {
 		assertNotNull(userRepository.save(u2.get()));
 		
 		userRepository.delete(u2.get());
-		assertThat((userRepository.findById(id)));
-		
-	}
-	
+		assertThat((userRepository.findById(id)));		
+	}	
 }

@@ -29,7 +29,7 @@ public class PurchaseRequestController {
 			Iterable<PurchaseRequest> purchaseRequests = purchaseRequestRepository.findAll();
 			return JsonResponse.getInstance(purchaseRequest);
 		} catch (Exception e) {
-			return JsonResponse.getErrorInstance("Purchase Request list empty: " + e.getMessage(), e);
+			return JsonResponse.getErrorInstance("Purchase request list failure: " + e.getMessage(), e);
 		}
 	}
 
@@ -41,10 +41,10 @@ public class PurchaseRequestController {
 			if (purchaseRequest.isPresent()) {
 				return JsonResponse.getInstance(purchaseRequest);
 			} else {
-				return JsonResponse.getErrorInstance("Error, purchase request id not valid: " + id, null);
+				return JsonResponse.getErrorInstance("Error, purchase request ID not found: " + id, null);
 			}
 		} catch (Exception e) {
-			return JsonResponse.getErrorInstance("Error, " + e.getMessage(), e);
+			return JsonResponse.getErrorInstance("Error, purchase request ID not valid" + e.getMessage(), e);
 		}
 	}
 
@@ -62,10 +62,10 @@ public class PurchaseRequestController {
 		try {
 			purchaseRequestRepository.save(submitPurchaseRequest(purchaseRequest));
 			return JsonResponse.getInstance(purchaseRequest);
-		} catch (DataIntegrityViolationException ex) {
-			return JsonResponse.getErrorInstance(ex.getRootCause().toString(), ex);
-		} catch (Exception ex) {
-			return JsonResponse.getErrorInstance(ex.getMessage(), ex);
+		} catch (DataIntegrityViolationException e) {
+			return JsonResponse.getErrorInstance(e.getRootCause().toString(), e);
+		} catch (Exception e) {
+			return JsonResponse.getErrorInstance(e.getMessage(), e);
 		}
 	}
 
@@ -75,7 +75,7 @@ public class PurchaseRequestController {
 			purchaseRequestRepository.delete(purchaseRequest);
 			return JsonResponse.getInstance(purchaseRequest);
 		} catch (Exception e) {
-			return JsonResponse.getErrorInstance("Error, :" + e.getMessage(), e);
+			return JsonResponse.getErrorInstance(e.getMessage(), e);
 		}
 	}
 
@@ -87,6 +87,5 @@ public class PurchaseRequestController {
 			purchaseRequest.setStatus(purchaseRequest.STATUS_NEW);
 		}
 		return purchaseRequest;
-
 	}
 }

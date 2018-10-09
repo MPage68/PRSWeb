@@ -30,10 +30,9 @@ public class ProductController {
 		try {
 			Iterable<Product> products = productRepository.findAll();
 		} catch (Exception e) {
-			return JsonResponse.getErrorInstance("No products in list:", e);
+			return JsonResponse.getErrorInstance("Product list failure:", e);
 		}
 		return null;
-
 	}
 
 	@GetMapping("/Get/{id}")
@@ -44,12 +43,11 @@ public class ProductController {
 			if (product.isPresent()) {
 				return JsonResponse.getInstance(product);
 			} else {
-				return JsonResponse.getErrorInstance("Incorrect product: " + id, null);
+				return JsonResponse.getErrorInstance("Error, product ID not found: " + id, null);
 			}
 		} catch (Exception e) {
-			return JsonResponse.getErrorInstance("Error, id not valid:" + e.getMessage(), e);
+			return JsonResponse.getErrorInstance("Error, product ID not valid:" + e.getMessage(), e);
 		}
-
 	}
 
 	@PostMapping("/Add")
@@ -66,12 +64,11 @@ public class ProductController {
 		try {
 			productRepository.save(product);
 			return JsonResponse.getInstance(product);
-		} catch (DataIntegrityViolationException ex) {
-			return JsonResponse.getErrorInstance(ex.getRootCause().toString(), ex);
-		} catch (Exception ex) {
-			return JsonResponse.getErrorInstance(ex.getMessage(), ex);
+		} catch (DataIntegrityViolationException e) {
+			return JsonResponse.getErrorInstance(e.getRootCause().toString(), e);
+		} catch (Exception e) {
+			return JsonResponse.getErrorInstance(e.getMessage(), e);
 		}
-
 	}
 
 	@PostMapping("/Remove")
@@ -81,8 +78,7 @@ public class ProductController {
 		return JsonResponse.getInstance(product);
 		}
 		catch(Exception e){
-			return JsonResponse.getErrorInstance("Product not deleted: " + e.getMessage(), e);
+			return JsonResponse.getErrorInstance(e.getMessage(), e);
 		}
 	}
-
 }
