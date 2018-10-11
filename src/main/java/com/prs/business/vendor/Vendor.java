@@ -21,7 +21,7 @@ public class Vendor {
 	private String zip;
 	private String phoneNumber;
 	private String email;
-	@Column(name = "PreApproved")
+	@Column(name = "IsPreApproved")
 	private boolean preApproved;
 
 	public Vendor() {

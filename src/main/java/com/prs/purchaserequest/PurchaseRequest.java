@@ -18,7 +18,7 @@ public class PurchaseRequest {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int ID;
 	@ManyToOne
-	@JoinColumn(name = "userID")
+	@JoinColumn(name = "UserID")
 	private User user;
 	private String description;
 	private String justification;

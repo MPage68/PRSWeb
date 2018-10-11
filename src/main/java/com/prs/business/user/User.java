@@ -17,9 +17,9 @@ public class User {
 	private String lastName;
 	private String phoneNumber;
 	private String eMail;
-	@Column(name = "isReviewer")
+	@Column(name = "IsReviewer")
 	private boolean reviewer;
-	@Column(name = "isAdmin")
+	@Column(name = "IsAdmin")
 	private boolean admin;
 
 	public User() {
