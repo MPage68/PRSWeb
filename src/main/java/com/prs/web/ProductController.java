@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +19,7 @@ import com.prs.business.product.ProductRepository;
 import com.prs.business.user.User;
 import com.prs.business.user.UserRepository;
 import com.prs.util.JsonResponse;
-
+@CrossOrigin
 @Controller
 @RequestMapping("/Products")
 public class ProductController {
@@ -26,14 +27,14 @@ public class ProductController {
 	private ProductRepository productRepository;
 
 	@GetMapping("/List")
-	public @ResponseBody JsonResponse getAllProducts(Product product) {
+	public @ResponseBody JsonResponse getAllProducts() {
 		try {
-			Iterable<Product> products = productRepository.findAll();
+			return JsonResponse.getInstance(productRepository.findAll());
 		} catch (Exception e) {
-			return JsonResponse.getErrorInstance("Product list failure:", e);
+			return JsonResponse.getErrorInstance("Product list failure:" + e.getMessage(), e);
 		}
-		return null;
 	}
+
 
 	@GetMapping("/Get/{id}")
 	public @ResponseBody JsonResponse getProduct(@PathVariable int id) {

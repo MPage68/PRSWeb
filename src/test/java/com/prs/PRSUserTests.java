@@ -13,8 +13,8 @@ import com.prs.business.user.User;
 import com.prs.business.user.UserRepository;
 
 import net.bytebuddy.dynamic.DynamicType.Builder.FieldDefinition.Optional;
-
 @RunWith(SpringRunner.class)
+
 public class PRSUserTests extends PrsWebApplicationTests {
 	@Autowired
 	private UserRepository userRepository;
