@@ -22,6 +22,11 @@ import com.prs.util.JsonResponse;
 public class PurchaseRequestController {
 	@Autowired
 	private PurchaseRequestRepository purchaseRequestRepository;
+	public final String STATUS_NEW = "New";
+	public final String STATUS_REVIEW = "Review";
+	public final String STATUS_EDIT = "Edit";
+	public final String STATUS_APPROVED = "Approved";
+	public final String STATUS_REJECTED = "Rejected";
 
 	@GetMapping("/List")
 	public @ResponseBody JsonResponse getAllPurchaseRequests(PurchaseRequest purchaseRequest) {
@@ -82,10 +87,31 @@ public class PurchaseRequestController {
 	public PurchaseRequest submitPurchaseRequest(PurchaseRequest purchaseRequest) {
 		purchaseRequest.setSubmittedDate(LocalDateTime.now());
 		if (purchaseRequest.getTotal() < 50) {
-			purchaseRequest.setStatus(purchaseRequest.STATUS_APPROVED);
+			purchaseRequest.setStatus(STATUS_APPROVED);
 		} else {
-			purchaseRequest.setStatus(purchaseRequest.STATUS_NEW);
+			purchaseRequest.setStatus(STATUS_NEW);
 		}
 		return purchaseRequest;
+	}
+
+	public @ResponseBody JsonResponse submitPurchaseRequestForReview(@RequestBody PurchaseRequest purchaseRequest) {
+		purchaseRequest.setStatus(STATUS_REVIEW);
+		return savePurchaseRequest(purchaseRequest);
+	}
+
+	public String getPurchaseRequestStatus(int id) {
+		Optional<PurchaseRequest> purchaseRequest = purchaseRequestRepository.findById(id);
+		return purchaseRequest.get().getStatus();
+
+	}
+
+	public @ResponseBody JsonResponse approvePurchaseRequest(@RequestBody PurchaseRequest purchaseRequest) {
+		purchaseRequest.setStatus(STATUS_APPROVED);
+		return savePurchaseRequest(purchaseRequest);
+	}
+
+	public @ResponseBody JsonResponse rejectPurchaseRequest(@RequestBody PurchaseRequest purchaseRequest) {
+		purchaseRequest.setStatus(STATUS_REJECTED);
+		return savePurchaseRequest(purchaseRequest);
 	}
 }

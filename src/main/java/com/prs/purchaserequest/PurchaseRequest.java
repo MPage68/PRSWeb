@@ -27,11 +27,7 @@ public class PurchaseRequest {
 	private String status;
 	private double total;
 	private LocalDateTime submittedDate;
-	public final String STATUS_NEW = "New";
-	public final String STATUS_REVIEW = "Review";
-	public final String STATUS_EDIT = "Edit";
-	public final String STATUS_APPROVED = "Approved";
-	public final String STATUS_REJECTED = "Rejected";
+	
 
 	public PurchaseRequest() {
 		ID = 0;
