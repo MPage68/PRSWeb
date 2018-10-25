@@ -55,16 +55,16 @@ public class PurchaseRequestLineItemController {
 			return JsonResponse.getErrorInstance("Error, purchase request line item not valid:" + e.getMessage(), e);
 		}
 	}
-	
+
 	@GetMapping("/LinesForPurchaseRequest")
-	public @ResponseBody Iterable <PurchaseRequestLineItem> getAllLinesForPurchaseRequest(@RequestParam int id) {
+	public @ResponseBody Iterable<PurchaseRequestLineItem> getAllLinesForPurchaseRequest(@RequestParam int id) {
 		return purchaseRequestLineItemRepository.findAllByPurchaseRequestId(id);
-		
+
 	}
 
 	@PostMapping("/Add")
 	public @ResponseBody JsonResponse addPurchaseRequestLineItem(
-			@RequestBody PurchaseRequestLineItem purchaseRequestLineItem) {		
+			@RequestBody PurchaseRequestLineItem purchaseRequestLineItem) {
 		return savePurchaseRequestLineItem(purchaseRequestLineItem);
 	}
 
@@ -87,22 +87,20 @@ public class PurchaseRequestLineItemController {
 	}
 
 	private void updateRequestTotal(PurchaseRequestLineItem prli) {
-Optional<PurchaseRequest> prOpt = purchaseRequestRepository.findById(prli.getPurchaseRequest().getID());
-		
+		Optional<PurchaseRequest> prOpt = purchaseRequestRepository.findById(prli.getPurchaseRequest().getID());
+
 		PurchaseRequest pr = prOpt.get();
 		List<PurchaseRequestLineItem> lines = new ArrayList<>();
 		lines = purchaseRequestLineItemRepository.findAllByPurchaseRequestId(pr.getID());
 		double total = 0;
-		for (PurchaseRequestLineItem line: lines) {
+		for (PurchaseRequestLineItem line : lines) {
 			Product p = line.getProduct();
-			double lineTotal = line.getQuantity()*p.getPrice();
+			double lineTotal = line.getQuantity() * p.getPrice();
 			total += lineTotal;
 		}
 		pr.setTotal(total);
 		purchaseRequestRepository.save(pr);
-	
 
-		
 	}
 
 	@PostMapping("/Remove")
