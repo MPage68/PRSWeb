@@ -1,4 +1,4 @@
-package com.prs.util;
+package com.prs.purchaseRequestLineItem;
 
 import java.text.DateFormat;
 

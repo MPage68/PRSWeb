@@ -12,9 +12,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.prs.business.product.Product;
 import com.prs.business.user.User;
 import com.prs.business.user.UserRepository;
+import com.prs.purchaseRequestLineItem.PurchaseRequestLineItem;
+import com.prs.purchaseRequestLineItem.PurchaseRequestLineItemRepository;
 import com.prs.purchaserequest.PurchaseRequest;
-import com.prs.util.PurchaseRequestLineItem;
-import com.prs.util.PurchaseRequestLineItemRepository;
 
 @RunWith(SpringRunner.class)
 public class PRSPurchaseRequestLineItemTests extends PrsWebApplicationTests{

@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.prs.business.product.Product;
+import com.prs.purchaseRequestLineItem.PurchaseRequestLineItem;
+import com.prs.purchaseRequestLineItem.PurchaseRequestLineItemRepository;
 import com.prs.purchaserequest.PurchaseRequest;
 import com.prs.purchaserequest.PurchaseRequestRepository;
 import com.prs.util.JsonResponse;
-import com.prs.util.PurchaseRequestLineItem;
-import com.prs.util.PurchaseRequestLineItemRepository;
 
 @CrossOrigin
 @Controller
