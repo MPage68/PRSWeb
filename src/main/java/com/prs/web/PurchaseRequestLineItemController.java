@@ -62,10 +62,36 @@ public class PurchaseRequestLineItemController {
 
 	}
 
-	@PostMapping("/Add")
-	public @ResponseBody JsonResponse addPurchaseRequestLineItem(
-			@RequestBody PurchaseRequestLineItem purchaseRequestLineItem) {
-		return savePurchaseRequestLineItem(purchaseRequestLineItem);
+	@PostMapping(path="/Add")
+	public @ResponseBody JsonResponse addNewPurchaseRequestLineItem (@RequestBody PurchaseRequestLineItem prli) {
+		//Session session = 
+		JsonResponse ret = null;
+		try {
+			if (prli.getProduct().getName().equals("")) {
+				// Incoming Json is not fully qualified so we need to look up the product
+				Product prod = prodRepository.findById(prli.getProduct().getId()).get();
+				prli.setProduct(prod);
+			}
+			ret = savePurchaseRequestLineItem(prli);
+			// ensure save was successful before continuing
+			// if save was not successful then pr total will be corrupt
+			if (!ret.getMessage().equals(JsonResponse.SUCCESS)) {
+				ret = JsonResponse.getErrorInstance("Failed to ADD prli.  Potential data corruption issue - purchaseRequestID = "+prli.getPurchaseRequest().getId());
+			}
+			else {
+				// update pr total
+				PurchaseRequest pr = updateRequestTotal((PurchaseRequestLineItem)ret.getData());
+				ret = JsonResponse.getInstance(pr);
+			}
+		}
+		catch (Exception e) {
+			String msg = "Add prli issue:  " + e.getMessage();
+			e.printStackTrace();
+			ret = JsonResponse.getErrorInstance(prli, msg);
+		}
+		return ret;
+	}
+
 	}
 
 	@PostMapping("/Change")
