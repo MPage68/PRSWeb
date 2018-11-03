@@ -60,10 +60,24 @@ public class JsonResponse {
 		this.error = error;
 	}
 	
-	public static JsonResponse getInstance(Object d) {
-		return new JsonResponse(0, SUCCESS, d, null);
-	}
-	public static JsonResponse getErrorInstance(String m, Exception e) {
-		return new JsonResponse(-1, m, null, e);
-	}
+	// Return a success instance w/ data result from service call
+		public static JsonResponse getInstance(Object d) {
+			return new JsonResponse(0, SUCCESS, d, null);
+		}
+		
+		// Return an error instance
+		public static JsonResponse getErrorInstance(String m, Exception e) {
+			return new JsonResponse(-1, m, null, e);
+		}
+		
+		// Return an error instance
+		public static JsonResponse getErrorInstance(String m) {
+			return new JsonResponse(-1, m, null, null);
+		}
+
+		// Return an error instance
+		public static JsonResponse getErrorInstance(Object d, String m) {
+			return new JsonResponse(-1, m, null, null);
+		}
+
 }

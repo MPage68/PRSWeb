@@ -48,7 +48,7 @@ public class PurchaseRequestController {
 			if (purchaseRequest.isPresent()) {
 				return JsonResponse.getInstance(purchaseRequest);
 			} else {
-				return JsonResponse.getErrorInstance("Error, purchase request ID not found: " + id, null);
+				return JsonResponse.getErrorInstance("Error, purchase request ID not found: " + id);
 			}
 		} catch (Exception e) {
 			return JsonResponse.getErrorInstance("Error, purchase request ID not valid" + e.getMessage(), e);

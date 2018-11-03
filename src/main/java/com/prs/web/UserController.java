@@ -34,17 +34,17 @@ public class UserController {
 		}
 	}
 
-	@GetMapping("/Get/{id}")
-	public @ResponseBody JsonResponse getUser(@PathVariable int id) {
+	@GetMapping("/Get/{ID}")
+	public @ResponseBody JsonResponse getUser(@PathVariable int ID) {
 		try {
-			Optional<User> user = userRepository.findById(id);
+			Optional<User> user = userRepository.findById(ID);
 			if (user.isPresent()) {
 				return JsonResponse.getInstance(user.get());
 			} else {
-				return JsonResponse.getErrorInstance("User ID not found:" + id, null);
+				return JsonResponse.getErrorInstance("User ID not found:" + ID);
 			}
 		} catch (Exception e) {
-			return JsonResponse.getErrorInstance("Error, User ID not valid:" + e.getMessage(), null);
+			return JsonResponse.getErrorInstance("Error, User ID not valID:" + e.getMessage());
 		}
 	}
 
@@ -54,7 +54,7 @@ public class UserController {
 			User u = userRepository.findByUserNameAndPassword(user.getUserName(), user.getPassword());
 			return JsonResponse.getInstance(u);
 		} catch (Exception e) {
-			return JsonResponse.getErrorInstance("Error, login not valid. Please try again:" + e.getMessage(), null);
+			return JsonResponse.getErrorInstance("Error, login not valid. Please try again:" + e.getMessage());
 		}
 	}
 

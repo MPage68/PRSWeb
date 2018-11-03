@@ -44,10 +44,10 @@ public class ProductController {
 			if (product.isPresent()) {
 				return JsonResponse.getInstance(product);
 			} else {
-				return JsonResponse.getErrorInstance("Error, product ID not found: " + id, null);
+				return JsonResponse.getErrorInstance("Error, product  not found: " + id);
 			}
 		} catch (Exception e) {
-			return JsonResponse.getErrorInstance("Error, product ID not valid:" + e.getMessage(), e);
+			return JsonResponse.getErrorInstance("Error, product  not valid:" + e.getMessage(), e);
 		}
 	}
 

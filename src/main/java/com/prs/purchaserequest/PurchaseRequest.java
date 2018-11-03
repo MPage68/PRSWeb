@@ -16,7 +16,7 @@ import com.prs.business.user.User;
 public class PurchaseRequest {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int ID;
+	private int id;
 	@ManyToOne
 	@JoinColumn(name = "UserID")
 	private User user;
@@ -30,7 +30,7 @@ public class PurchaseRequest {
 	
 
 	public PurchaseRequest() {
-		ID = 0;
+		id = 0;
 		user = null;
 		description = "";
 		justification = "";
@@ -57,7 +57,7 @@ public class PurchaseRequest {
 	public PurchaseRequest(int iD, User user, String description, String justification, LocalDate dateNeeded,
 			String deliveryMode, String status, double total, LocalDateTime submittedDate) {
 		super();
-		ID = iD;
+		id = iD;
 		this.user = user;
 		this.description = description;
 		this.justification = justification;
@@ -69,11 +69,11 @@ public class PurchaseRequest {
 	}
 
 	public int getID() {
-		return ID;
+		return id;
 	}
 
 	public void setID(int iD) {
-		ID = iD;
+		id = iD;
 	}
 
 	public User getUser() {
@@ -142,7 +142,7 @@ public class PurchaseRequest {
 
 	@Override
 	public String toString() {
-		return "PurchaseRequest [ID=" + ID + ", user=" + user + ", description=" + description + ", justification="
+		return "PurchaseRequest [ID=" + id + ", user=" + user + ", description=" + description + ", justification="
 				+ justification + ", dateNeeded=" + dateNeeded + ", deliveryMode=" + deliveryMode + ", status=" + status
 				+ ", total=" + total + ", submittedDate=" + submittedDate + "]";
 	}

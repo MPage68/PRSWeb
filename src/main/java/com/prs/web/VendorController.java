@@ -41,7 +41,7 @@ public class VendorController {
 			if (vendor.isPresent()) {
 				return JsonResponse.getInstance(vendor);
 			} else {
-				return JsonResponse.getErrorInstance("Error, Vendor ID not found:" + id, null);
+				return JsonResponse.getErrorInstance("Error, Vendor id not found:" + id);
 			}
 		} catch (Exception e) {
 			return JsonResponse.getErrorInstance("Error, Vendor ID not valid:" + e.getMessage(), e);
